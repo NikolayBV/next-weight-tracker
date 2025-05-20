@@ -2,21 +2,21 @@
 import './login.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button/Button";
+import Input from "@/components/ui/input/Input";
+import Form from "@/components/forms/form/Form";
+import {apiInstance} from "@/api/api";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
 
-    const handleLogin = async () => {
-        const res = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const res = await apiInstance.login({email, password});
 
-        if (res.ok) {
+        if (res) {
             router.push('/dashboard');
         } else {
             alert('Ошибка входа');
@@ -24,31 +24,20 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="login">
-            <h1 className="login__title">Вход</h1>
-            <div className="login__form">
-                <label className="login__label">
-                    Email
-                    <input
-                        className="login__input"
-                        type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </label>
+        <Form title={"Вход"} onSubmit={handleLogin}>
+            <Input value={email}
+                   onChange={e => setEmail(e.target.value)}
+                   inputTitle={'Email'}
+                   type={"Email"}
+            />
 
-                <label className="login__label">
-                    Пароль
-                    <input
-                        className="login__input"
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </label>
-                
-                <Button onClick={handleLogin} buttonTitle={"Войти"}></Button>
-            </div>
-        </div>
+            <Input value={password}
+                   onChange={e => setPassword(e.target.value)}
+                   inputTitle={'Пароль'}
+                   type={"password"}
+            />
+
+            <Button  buttonTitle={"Войти"}></Button>
+        </Form>
     );
 }

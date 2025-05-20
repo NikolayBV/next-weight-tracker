@@ -1,6 +1,6 @@
 'use client';
 import "./layout.css";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button/Button";
 import {redirect} from "next/navigation";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
