@@ -1,5 +1,5 @@
 import api from "@/lib/axios";
-import {AxiosInstance} from "axios";
+import axios, {AxiosInstance} from "axios";
 import {LoginData, RegisterData} from "@/utils/interfaces";
 
 class Api {
@@ -23,7 +23,25 @@ class Api {
             const response = await this.api.post('auth/register', { email, password, age, height });
             return response.data;
         } catch (error) {
-            console.error('Ошибка регистрации:', error);
+            if (axios.isAxiosError(error)) {
+                if (error.response?.status === 409) {
+                    console.log('Такой email уже зарегистрирован!');
+                }
+                console.error('Axios ошибка регистрации:', error.response?.data);
+            } else {
+                console.error('Неизвестная ошибка регистрации:', error);
+            }
+
+            throw error;
+        }
+    }
+    
+    async getUser(userId: string) {
+        try {
+            const response = await this.api.get(`users/${userId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка получения пользователя:', error);
             throw error;
         }
     }

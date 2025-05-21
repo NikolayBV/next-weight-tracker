@@ -6,20 +6,24 @@ import Button from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/Input";
 import Form from "@/components/forms/form/Form";
 import {apiInstance} from "@/api/api";
+import {useAuthStore} from "@/stores/authStore";
+import {useUserStore} from "@/stores/userStore";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    const setToken = useAuthStore(state => state.setAccessToken);
+    const setUserId = useUserStore(state => state.setUserId);
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await apiInstance.login({email, password});
 
-        if (res) {
+        const response = await apiInstance.login({email, password});
+        if(response && response.token){
+            setToken(response.token);
+            setUserId(response.user.id);
             router.push('/dashboard');
-        } else {
-            alert('Ошибка входа');
         }
     };
 

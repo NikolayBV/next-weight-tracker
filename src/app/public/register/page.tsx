@@ -5,6 +5,9 @@ import Form from "@/components/forms/form/Form";
 import Input from "@/components/ui/input/Input";
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
+import {apiInstance} from "@/api/api";
+import {useAuthStore} from "@/stores/authStore";
+import {useUserStore} from "@/stores/userStore";
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -12,14 +15,21 @@ export default function Register() {
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
     const router = useRouter();
+    const setToken = useAuthStore(state => state.setAccessToken);
+    const setUserId = useUserStore(state => state.setUserId);
     
-    function handleRegister(e: React.FormEvent<HTMLFormElement>) {
+    async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!email || !password || !age || !height) {
             alert('Заполните все поля!');
             return;
         }
-       console.log(email, password, +age, +height); 
+        const response = await apiInstance.register({email, password, age, height});
+        if(response && response.token){
+            setToken(response.token);
+            setUserId(response.user.id);
+            router.push('/dashboard');
+        }
     }
     
     return (

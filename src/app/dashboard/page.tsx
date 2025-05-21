@@ -1,5 +1,12 @@
+'use client';
+
+import Layout from "@/app/dashboard/layout";
+
 export default function DashboardPage() {
+
     return (
-        <h1>Dashboard</h1>
+        <Layout>
+            <h1>Dashboard</h1>
+        </Layout>
     );
 }
