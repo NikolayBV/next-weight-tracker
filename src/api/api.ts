@@ -45,6 +45,26 @@ class Api {
             throw error;
         }
     }
+    
+    async refresh() {
+        try {
+            const response = await this.api.post('/auth/refresh');
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка получения пользователя:', error);
+            throw error;
+        }
+    }
+
+    async logout() {
+        try {
+            const response = await this.api.post('/auth/logout');
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка получения пользователя:', error);
+            throw error;
+        }
+    }
 }
 
 export const apiInstance = new Api();
