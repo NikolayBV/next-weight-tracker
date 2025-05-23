@@ -29,6 +29,7 @@ export const useAuth = () => {
                 }
             } catch (err) {
                 router.replace(`/public/login`);
+                console.log(err);
             } finally {
                 setLoading(false);
             }
@@ -37,5 +38,5 @@ export const useAuth = () => {
         checkAuth();
     }, []);
 
-    return { loading }; // можешь использовать, чтобы показать спиннер
+    return { loading };
 };

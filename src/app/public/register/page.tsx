@@ -1,6 +1,6 @@
 'use client';
 
-import Button from "@/components/ui/button/Button";
+import MyButton from "@/components/ui/my-button/MyButton";
 import Form from "@/components/forms/form/Form";
 import Input from "@/components/ui/input/Input";
 import React, {useState} from "react";
@@ -12,7 +12,7 @@ import {useUserStore} from "@/stores/userStore";
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [age, setAge] = useState("");
+    const [birthdayDate, setBirthdayDate] = useState("");
     const [height, setHeight] = useState("");
     const router = useRouter();
     const setToken = useAuthStore(state => state.setAccessToken);
@@ -20,11 +20,11 @@ export default function Register() {
     
     async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (!email || !password || !age || !height) {
+        if (!email || !password || !birthdayDate || !height) {
             alert('Заполните все поля!');
             return;
         }
-        const response = await apiInstance.register({email, password, age, height});
+        const response = await apiInstance.register({email, password, birthdayDate, height});
         if(response && response.token){
             setToken(response.token);
             setUserId(response.user.id);
@@ -44,17 +44,17 @@ export default function Register() {
                    onChange={e => setPassword(e.target.value)}
                    type={"password"}
             />
-            <Input inputTitle={'Возраст'}
-                   value={age}
-                   onChange={e => setAge(e.target.value)}
-                   type={"text"}
+            <Input inputTitle={'Дата рождения'}
+                   value={birthdayDate}
+                   onChange={e => setBirthdayDate(e.target.value)}
+                   type={"date"}
             />
             <Input inputTitle={'Рост'}
                    value={height}
                    onChange={e => setHeight(e.target.value)}
                    type={"text"}
             />
-            <Button type={"submit"} buttonTitle={"Зарегистрироваться"}/>
+            <MyButton size={"xs"} buttonTitle={"Зарегистрироваться"}/>
         </Form>
     );
 } 

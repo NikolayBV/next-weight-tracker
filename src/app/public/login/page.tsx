@@ -2,7 +2,7 @@
 import './login.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Button from "@/components/ui/button/Button";
+import MyButton from "@/components/ui/my-button/MyButton";
 import Input from "@/components/ui/input/Input";
 import Form from "@/components/forms/form/Form";
 import {apiInstance} from "@/api/api";
@@ -41,7 +41,7 @@ export default function LoginPage() {
                    type={"password"}
             />
 
-            <Button  buttonTitle={"Войти"}></Button>
+            <MyButton buttonTitle={"Войти"}></MyButton>
         </Form>
     );
 }

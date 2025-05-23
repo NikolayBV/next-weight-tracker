@@ -2,17 +2,14 @@
 
 import Layout from "@/app/dashboard/layout";
 import {useAuth} from "@/utils/hooks/useAuth";
-import Button from "@/components/ui/button/Button";
-import {useLogout} from "@/utils/hooks/useLogout";
+import MainTabs from "@/components/ui/main-tabs/MainTabs";
 
 export default function DashboardPage() {
     useAuth();
     
-    const handleLogout = useLogout();
     return (
         <Layout>
-            <h1>Dashboard</h1>
-            <Button buttonTitle={"Выйти"} type={"button"} onClick={handleLogout}/>
+            <MainTabs />
         </Layout>
     );
 }

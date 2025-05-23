@@ -18,9 +18,9 @@ class Api {
         }
     }
     
-    async register({email, password, age, height}: RegisterData) {
+    async register({email, password, birthdayDate, height}: RegisterData) {
         try {
-            const response = await this.api.post('auth/register', { email, password, age, height });
+            const response = await this.api.post('auth/register', { email, password, birthdayDate, height });
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -51,7 +51,7 @@ class Api {
             const response = await this.api.post('/auth/refresh');
             return response.data;
         } catch (error) {
-            console.error('Ошибка получения пользователя:', error);
+            console.info('Ошибка получения пользователя:', error);
             throw error;
         }
     }

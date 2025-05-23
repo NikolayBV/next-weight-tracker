@@ -1,7 +1,7 @@
 export interface RegisterData {
     email: string;
     password: string;
-    age: string;
+    birthdayDate: string;
     height: string;
 }
 

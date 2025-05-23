@@ -3,8 +3,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #fff;
   color: #222;
   height: 100%;
@@ -18,8 +16,8 @@ body {
 
 header {
   padding: 1rem;
-  background-color: #eee;
   text-align: center;
+  border-bottom: 1px lightgray solid;
 }
 
 main {
@@ -32,6 +30,6 @@ main {
 
 footer {
   padding: 1rem;
-  background-color: #eee;
   text-align: center;
+  border-top: 1px lightgray solid;
 }

@@ -1,6 +1,6 @@
 'use client';
 import "./layout.css";
-import Button from "@/components/ui/button/Button";
+import MyButton from "@/components/ui/my-button/MyButton";
 import {redirect} from "next/navigation";
 import {useAuth} from "@/utils/hooks/useAuth";
 
@@ -18,8 +18,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 {children}
             </section>
             <nav className="nav">
-                <Button onClick={onClickLoginBtn} buttonTitle={"Войти"}></Button>
-                <Button onClick={onClickRegisterBtn} buttonTitle={"Зарегистрироваться"}></Button>
+                <MyButton onClick={onClickLoginBtn} buttonTitle={"Войти"}></MyButton>
+                <MyButton onClick={onClickRegisterBtn} buttonTitle={"Зарегистрироваться"}></MyButton>
             </nav>
         </>
     );
