@@ -1,7 +1,9 @@
 import "./globals.css";
 import Link from "next/link";
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import {MantineProvider} from "@mantine/core";
+import {Notifications} from "@mantine/notifications";
 
 export default function RootLayout({
   children,
@@ -16,6 +18,7 @@ export default function RootLayout({
       primaryColor: 'blue',
       defaultRadius: 'md',
     }}>
+      <Notifications />
       <header>
         <h1>Weight tracker</h1>
       </header>

@@ -1,9 +1,9 @@
 'use client';
 import './login.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import MyButton from "@/components/ui/my-button/MyButton";
-import Input from "@/components/ui/input/Input";
+import MyInput from "@/components/ui/input/MyInput";
 import Form from "@/components/forms/form/Form";
 import {apiInstance} from "@/api/api";
 import {useAuthStore} from "@/stores/authStore";
@@ -18,7 +18,10 @@ export default function LoginPage() {
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        if (!email || !password) {
+            alert('Заполните все поля!');
+            return;
+        }
         const response = await apiInstance.login({email, password});
         if(response && response.token){
             setToken(response.token);
@@ -29,19 +32,19 @@ export default function LoginPage() {
 
     return (
         <Form title={"Вход"} onSubmit={handleLogin}>
-            <Input value={email}
-                   onChange={e => setEmail(e.target.value)}
-                   inputTitle={'Email'}
-                   type={"Email"}
+            <MyInput value={email}
+                     onChange={e => setEmail(e.target.value)}
+                     inputTitle={'Email'}
+                     type={"Email"}
             />
 
-            <Input value={password}
-                   onChange={e => setPassword(e.target.value)}
-                   inputTitle={'Пароль'}
-                   type={"password"}
+            <MyInput value={password}
+                     onChange={e => setPassword(e.target.value)}
+                     inputTitle={'Пароль'}
+                     type={"password"}
             />
 
-            <MyButton buttonTitle={"Войти"}></MyButton>
+            <MyButton buttonTitle={"Войти"} type={'submit'}></MyButton>
         </Form>
     );
 }

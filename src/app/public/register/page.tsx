@@ -2,7 +2,7 @@
 
 import MyButton from "@/components/ui/my-button/MyButton";
 import Form from "@/components/forms/form/Form";
-import Input from "@/components/ui/input/Input";
+import MyInput from "@/components/ui/input/MyInput";
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {apiInstance} from "@/api/api";
@@ -34,25 +34,25 @@ export default function Register() {
     
     return (
         <Form title={"Регистрация"} onSubmit={handleRegister}>
-            <Input inputTitle={'Email'} 
-                   value={email} 
-                   onChange={e => setEmail(e.target.value)}
-                   type={"email"}
+            <MyInput inputTitle={'Email'}
+                     value={email}
+                     onChange={e => setEmail(e.target.value)}
+                     type={"email"}
             />
-            <Input inputTitle={'Пароль'}
-                   value={password}
-                   onChange={e => setPassword(e.target.value)}
-                   type={"password"}
+            <MyInput inputTitle={'Пароль'}
+                     value={password}
+                     onChange={e => setPassword(e.target.value)}
+                     type={"password"}
             />
-            <Input inputTitle={'Дата рождения'}
-                   value={birthdayDate}
-                   onChange={e => setBirthdayDate(e.target.value)}
-                   type={"date"}
+            <MyInput inputTitle={'Дата рождения'}
+                     value={birthdayDate}
+                     onChange={e => setBirthdayDate(e.target.value)}
+                     type={"date"}
             />
-            <Input inputTitle={'Рост'}
-                   value={height}
-                   onChange={e => setHeight(e.target.value)}
-                   type={"text"}
+            <MyInput inputTitle={'Рост'}
+                     value={height}
+                     onChange={e => setHeight(e.target.value)}
+                     type={"text"}
             />
             <MyButton size={"xs"} buttonTitle={"Зарегистрироваться"}/>
         </Form>

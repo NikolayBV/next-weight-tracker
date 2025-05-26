@@ -1,6 +1,7 @@
 import api from "@/lib/axios";
-import axios, {AxiosInstance} from "axios";
+import axios, {AxiosError, AxiosInstance} from "axios";
 import {LoginData, RegisterData} from "@/utils/interfaces";
+import {notifications} from "@mantine/notifications";
 
 class Api {
     private api: AxiosInstance;
@@ -13,8 +14,18 @@ class Api {
             const response = await this.api.post('auth/login', { email, password });
             return response.data;
         } catch (error) {
-            console.error('Ошибка логина:', error);
-            throw error;
+            const axiosError = error as AxiosError;
+            if (axiosError.response?.status === 403) {
+                notifications.show({
+                    title: 'Error',
+                    message: 'Incorrect email or password',
+                });
+            } else {
+                notifications.show({
+                    title: 'Error',
+                    message: 'Unknown error',
+                });
+            }
         }
     }
     

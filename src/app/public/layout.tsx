@@ -18,8 +18,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 {children}
             </section>
             <nav className="nav">
-                <MyButton onClick={onClickLoginBtn} buttonTitle={"Войти"}></MyButton>
-                <MyButton onClick={onClickRegisterBtn} buttonTitle={"Зарегистрироваться"}></MyButton>
+                <MyButton onClick={onClickLoginBtn} buttonTitle={"Вход"}></MyButton>
+                <MyButton onClick={onClickRegisterBtn} buttonTitle={"Регистрация"}></MyButton>
             </nav>
         </>
     );
