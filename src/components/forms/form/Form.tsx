@@ -4,7 +4,7 @@ import {FormEvent} from "react";
 
 interface FormProps {
     children: React.ReactNode;
-    title: string;
+    title?: string;
     onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
 }
 

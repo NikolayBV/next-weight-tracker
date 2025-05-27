@@ -54,7 +54,7 @@ export default function Register() {
                      onChange={e => setHeight(e.target.value)}
                      type={"text"}
             />
-            <MyButton size={"xs"} buttonTitle={"Зарегистрироваться"}/>
+            <MyButton size={"xs"} buttonTitle={"Зарегистрироваться"} type={'submit'}/>
         </Form>
     );
 } 

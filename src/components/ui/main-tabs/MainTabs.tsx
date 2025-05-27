@@ -2,6 +2,7 @@ import { Tabs } from '@mantine/core';
 import { IconDashboard, IconList, IconUser } from '@tabler/icons-react';
 import MyButton from "@/components/ui/my-button/MyButton";
 import {useLogout} from "@/utils/hooks/useLogout";
+import DashboardTab from "@/components/ui/dashboard-tab/DashboardTab";
 
 export default function MainTabs() {
     const handleLogout = useLogout();
@@ -20,7 +21,7 @@ export default function MainTabs() {
             </Tabs.List>
 
             <Tabs.Panel value="dashboard">
-                Dashboard
+                <DashboardTab/>
             </Tabs.Panel>
 
             <Tabs.Panel value="history">

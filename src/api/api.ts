@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import axios, {AxiosError, AxiosInstance} from "axios";
-import {LoginData, RegisterData} from "@/utils/interfaces";
+import {AddWeighData, LoginData, RegisterData} from "@/utils/interfaces";
 import {notifications} from "@mantine/notifications";
 
 class Api {
@@ -70,6 +70,16 @@ class Api {
     async logout() {
         try {
             const response = await this.api.post('/auth/logout');
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка получения пользователя:', error);
+            throw error;
+        }
+    }
+    
+    async addWeight({userId, weight, date}: AddWeighData) {
+        try {
+            const response = await this.api.post(`/weights/${userId}`, { weight, date });
             return response.data;
         } catch (error) {
             console.error('Ошибка получения пользователя:', error);
