@@ -6,12 +6,14 @@ import Form from "@/components/forms/form/Form";
 import {apiInstance} from "@/api/api";
 import {useUserStore} from "@/stores/userStore";
 import {notifications} from "@mantine/notifications";
+import {useWeightStore} from "@/stores/weightStore";
 
 export default function DashboardTab() {
     const [opened, { open, close }] = useDisclosure(false);
     const [weight, setWeight] = useState("");
     const [date, setDate] = useState("");
     const userId = useUserStore(state => state.userId);
+    const setUserWeight = useWeightStore(state => state.setUserWeight);
     
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,6 +30,10 @@ export default function DashboardTab() {
             }
             const response = await apiInstance.addWeight({userId,weight, date});
             if (response.message == "Вес успешно добавлен") {
+                const weights = await apiInstance.getWeight(userId);
+                if (weights && Array.isArray(weights.entries) && weights.entries.length > 0) {
+                    setUserWeight(weights.entries);
+                }
                 notifications.show({title: 'Успех', message: 'Вес успешно добавлен', color: 'green'});
             }
             close();
@@ -46,7 +52,7 @@ export default function DashboardTab() {
                 </Form>
             </Modal>
 
-            <Button variant="default" onClick={open}>
+            <Button variant="filled" onClick={open}>
                 Добавить вес
             </Button>
         </>

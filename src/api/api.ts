@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import axios, {AxiosError, AxiosInstance} from "axios";
-import {AddWeighData, LoginData, RegisterData} from "@/utils/interfaces";
+import {AddWeighData, LoginData, RegisterData, Weight} from "@/utils/interfaces";
 import {notifications} from "@mantine/notifications";
 
 class Api {
@@ -83,6 +83,20 @@ class Api {
             return response.data;
         } catch (error) {
             console.error('Ошибка получения пользователя:', error);
+            throw error;
+        }
+    }
+    
+    async getWeight(userId: string): Promise<{message: string, entries: Weight[]}> {
+        try {
+            const response = await this.api.get(`/weights/${userId}`);
+            return response.data;
+        } catch (error) {
+            notifications.show({
+                title: 'Error',
+                message: 'Ошибка получения веса пользователя',
+            });
+            console.error('Ошибка получения веса пользователя:', error);
             throw error;
         }
     }
