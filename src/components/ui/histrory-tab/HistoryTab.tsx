@@ -1,29 +1,48 @@
 "use client";
-import { ScrollArea, Table, Text } from '@mantine/core';
-import {useWeightStore} from "@/stores/weightStore";
+import { ScrollArea, Table, Text, Box } from "@mantine/core";
+import { IconArrowsUpDown } from "@tabler/icons-react";
+import { useWeightStore } from "@/stores/weightStore";
+import { useSortedWeights } from "@/utils/hooks/useSortedWeights";
 
 export default function HistoryTab() {
-    const userWeights = useWeightStore(state => state.userWeight);
-    const rows = userWeights.map((element) => (
-        <Table.Tr key={element.id}>
-            <Table.Td>{element.weight}</Table.Td>
-            <Table.Td>{new Date(element.date).toLocaleDateString("ru-RU")}</Table.Td>
+    const weights = useWeightStore((state) => state.userWeight);
+    const { sortBy, sortOrder, handleSort } = useSortedWeights();
+
+    const renderIcon = (key: "weight" | "date") => {
+        if (sortBy !== key) return <IconArrowsUpDown size="0.9rem" stroke={1.5} />;
+        return sortOrder === "asc" ? <span>▲</span> : <span>▼</span>;
+    };
+
+    const rows = weights.map((el) => (
+        <Table.Tr key={el.id}>
+            <Table.Td>{el.weight}</Table.Td>
+            <Table.Td>{new Date(el.date).toLocaleDateString("ru-RU")}</Table.Td>
         </Table.Tr>
     ));
 
     return (
         <div>
-            <Text size="xl" fw={500} mb="md">История веса</Text>
+            <Text size="xl" fw={500} mb="md">
+                История веса
+            </Text>
 
-            {userWeights.length === 0 ? (
+            {weights.length === 0 ? (
                 <p>Нет данных</p>
             ) : (
                 <ScrollArea h={250}>
                     <Table>
                         <Table.Thead>
                             <Table.Tr>
-                                <Table.Th>Вес</Table.Th>
-                                <Table.Th>Дата</Table.Th>
+                                <Table.Th>
+                                    <Box onClick={() => handleSort("weight")} style={{ display: "inline-flex", gap: 4, cursor: "pointer", alignItems: "center" }}>
+                                        Вес {renderIcon("weight")}
+                                    </Box>
+                                </Table.Th>
+                                <Table.Th>
+                                    <Box onClick={() => handleSort("date")} style={{ display: "inline-flex", gap: 4, cursor: "pointer", alignItems: "center" }}>
+                                        Дата {renderIcon("date")}
+                                    </Box>
+                                </Table.Th>
                             </Table.Tr>
                         </Table.Thead>
                         <Table.Tbody>{rows}</Table.Tbody>

@@ -87,9 +87,9 @@ class Api {
         }
     }
     
-    async getWeight(userId: string): Promise<{message: string, entries: Weight[]}> {
+    async getWeight({userId, sortBy, sortOrder}: {userId: string, sortBy?: string, sortOrder?: string}): Promise<{message: string, entries: Weight[]}> {
         try {
-            const response = await this.api.get(`/weights/${userId}`);
+            const response = await this.api.get(`/weights/${userId}?sortBy=${sortBy}&order=${sortOrder}`);
             return response.data;
         } catch (error) {
             notifications.show({

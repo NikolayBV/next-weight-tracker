@@ -1,4 +1,4 @@
-import {useUserStore} from "@/stores/userStore";
+/*import {useUserStore} from "@/stores/userStore";
 import {useWeightStore} from "@/stores/weightStore";
 import {useEffect} from "react";
 import {apiInstance} from "@/api/api";
@@ -19,4 +19,4 @@ export function useLoadWeights() {
         };
         fetch();
     }, [userId]);
-}
+}*/
