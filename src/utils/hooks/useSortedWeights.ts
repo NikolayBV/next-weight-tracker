@@ -26,7 +26,6 @@ export const useSortedWeights = () => {
     }, [userId, sortBy, sortOrder]);
 
     const handleSort = (key: 'date' | 'weight') => {
-        console.log(sortBy, sortOrder,key)
         if (sortBy === key) {
             setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
         } else {

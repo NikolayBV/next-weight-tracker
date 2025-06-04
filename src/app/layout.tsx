@@ -2,6 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/charts/styles.css';
 import {MantineProvider} from "@mantine/core";
 import {Notifications} from "@mantine/notifications";
 

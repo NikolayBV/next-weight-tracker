@@ -7,6 +7,7 @@ import {apiInstance} from "@/api/api";
 import {useUserStore} from "@/stores/userStore";
 import {notifications} from "@mantine/notifications";
 import {useWeightStore} from "@/stores/weightStore";
+import WeightChart from "@/components/ui/weight-chart/WeightChart";
 
 export default function DashboardTab() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -30,7 +31,7 @@ export default function DashboardTab() {
             }
             const response = await apiInstance.addWeight({userId,weight, date});
             if (response.message == "Вес успешно добавлен") {
-                const weights = await apiInstance.getWeight(userId);
+                const weights = await apiInstance.getWeight({userId, sortBy: 'date', sortOrder: 'asc'});
                 if (weights && Array.isArray(weights.entries) && weights.entries.length > 0) {
                     setUserWeight(weights.entries);
                 }
@@ -55,6 +56,7 @@ export default function DashboardTab() {
             <Button variant="filled" onClick={open}>
                 Добавить вес
             </Button>
+            <WeightChart />
         </>
     );
 } 
