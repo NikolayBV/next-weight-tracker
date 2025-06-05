@@ -3,17 +3,20 @@
 import MyButton from "@/components/ui/my-button/MyButton";
 import Form from "@/components/forms/form/Form";
 import MyInput from "@/components/ui/input/MyInput";
+import { Select } from '@mantine/core';
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {apiInstance} from "@/api/api";
 import {useAuthStore} from "@/stores/authStore";
 import {useUserStore} from "@/stores/userStore";
+import {Gender} from "@/utils/types";
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [birthdayDate, setBirthdayDate] = useState("");
     const [height, setHeight] = useState("");
+    const [gender, setGender] = useState<Gender | "">("");
     const router = useRouter();
     const setToken = useAuthStore(state => state.setAccessToken);
     const setUserId = useUserStore(state => state.setUserId);
@@ -24,7 +27,7 @@ export default function Register() {
             alert('Заполните все поля!');
             return;
         }
-        const response = await apiInstance.register({email, password, birthdayDate, height});
+        const response = await apiInstance.register({email, password, birthdayDate, height, gender});
         if(response && response.token){
             setToken(response.token);
             setUserId(response.user.id);
@@ -53,6 +56,12 @@ export default function Register() {
                      value={height}
                      onChange={e => setHeight(e.target.value)}
                      type={"text"}
+            />
+            <Select
+                label="Пол"
+                placeholder="Пол"
+                data={['Man', 'Woman']}
+                onChange={e => setGender(e as Gender)}
             />
             <MyButton size={"xs"} buttonTitle={"Зарегистрироваться"} type={'submit'}/>
         </Form>

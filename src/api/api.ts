@@ -29,9 +29,9 @@ class Api {
         }
     }
     
-    async register({email, password, birthdayDate, height}: RegisterData) {
+    async register({email, password, birthdayDate, height, gender}: RegisterData) {
         try {
-            const response = await this.api.post('auth/register', { email, password, birthdayDate, height });
+            const response = await this.api.post('auth/register', { email, password, birthdayDate, height, gender });
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {

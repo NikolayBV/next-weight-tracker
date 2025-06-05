@@ -14,7 +14,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const router = useRouter();
     const setToken = useAuthStore(state => state.setAccessToken);
-    const setUserId = useUserStore(state => state.setUserId);
+    const setUserData = useUserStore(state => state.setUserData);
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ export default function LoginPage() {
         const response = await apiInstance.login({email, password});
         if(response && response.token){
             setToken(response.token);
-            setUserId(response.user.id);
+            setUserData(response.user)
             router.push('/dashboard');
         }
     };

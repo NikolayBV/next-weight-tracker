@@ -1,8 +1,11 @@
+import {Gender} from "@/utils/types";
+
 export interface RegisterData {
     email: string;
     password: string;
     birthdayDate: string;
     height: string;
+    gender: Gender | "";
 }
 
 export interface AddWeighData {

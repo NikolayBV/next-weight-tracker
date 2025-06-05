@@ -1,3 +1,4 @@
+'use client';
 import {Button, Modal} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
 import MyInput from "@/components/ui/input/MyInput";
@@ -8,6 +9,8 @@ import {useUserStore} from "@/stores/userStore";
 import {notifications} from "@mantine/notifications";
 import {useWeightStore} from "@/stores/weightStore";
 import WeightChart from "@/components/ui/weight-chart/WeightChart";
+import BmiCard from "@/components/bmi-card/BmiCard";
+import styles from "./dashboard-tab.module.css";
 
 export default function DashboardTab() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -42,7 +45,7 @@ export default function DashboardTab() {
     };
 
     return (
-        <>
+        <section className={styles.tab}>
             <Modal opened={opened} onClose={close} centered>
                 <Form title="Добавление веса" onSubmit={(e) => handleSubmit(e)}>
                     <MyInput inputTitle={"Вес"} value={weight} type={"number"}
@@ -53,10 +56,11 @@ export default function DashboardTab() {
                 </Form>
             </Modal>
 
-            <Button variant="filled" onClick={open}>
+            <Button className={styles.tab__button} variant="filled" onClick={open}>
                 Добавить вес
             </Button>
+            <BmiCard />
             <WeightChart />
-        </>
+        </section>
     );
 } 
