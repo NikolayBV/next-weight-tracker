@@ -12,7 +12,12 @@ export default function WeightChart() {
         weightLine: w.weight,
         weightArea: w.weight,
     }));
-    return (
+
+    console.log(chartData);
+
+    return chartData.length === 0 ? (
+        <p>Нет данных</p>
+    ) : (
         <Box className={styles.chart}>
             <CompositeChart
                 h={300}

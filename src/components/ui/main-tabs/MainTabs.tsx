@@ -1,13 +1,11 @@
 import "./main-tabs.css";
 import { Tabs } from '@mantine/core';
 import { IconDashboard, IconList, IconUser } from '@tabler/icons-react';
-import MyButton from "@/components/ui/my-button/MyButton";
-import {useLogout} from "@/utils/hooks/useLogout";
 import DashboardTab from "@/components/ui/dashboard-tab/DashboardTab";
 import HistoryTab from "@/components/ui/histrory-tab/HistoryTab";
+import ProfileTab from "@/components/ui/profile-tab/ProfileTab";
 
 export default function MainTabs() {
-    const handleLogout = useLogout();
     return (
         <Tabs defaultValue="dashboard">
             <Tabs.List>
@@ -31,7 +29,7 @@ export default function MainTabs() {
             </Tabs.Panel>
 
             <Tabs.Panel value="profile">
-                <MyButton buttonTitle={"Выйти"} size={"xs"} onClick={handleLogout}/>
+                <ProfileTab />
             </Tabs.Panel>
         </Tabs>
     );

@@ -3,6 +3,7 @@ import { ScrollArea, Table, Text, Box } from "@mantine/core";
 import { IconArrowsUpDown } from "@tabler/icons-react";
 import { useWeightStore } from "@/stores/weightStore";
 import { useSortedWeights } from "@/utils/hooks/useSortedWeights";
+import styles from "./history-tab.module.css";
 
 export default function HistoryTab() {
     const weights = useWeightStore((state) => state.userWeight);
@@ -21,7 +22,7 @@ export default function HistoryTab() {
     ));
 
     return (
-        <div>
+        <div className={styles.tab}>
             <Text size="xl" fw={500} mb="md">
                 История веса
             </Text>
